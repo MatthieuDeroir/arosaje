@@ -1,2 +1,6 @@
-package fr.madeit.arosaje.SRV;public class AnnounceService {
+package fr.madeit.arosaje.SRV;
+
+public class AnnounceService {
+
+
 }

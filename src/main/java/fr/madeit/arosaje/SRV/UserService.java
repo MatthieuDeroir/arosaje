@@ -1,2 +1,4 @@
-package fr.madeit.arosaje.SRV;public class UserService {
+package fr.madeit.arosaje.SRV;
+
+public class UserService {
 }
