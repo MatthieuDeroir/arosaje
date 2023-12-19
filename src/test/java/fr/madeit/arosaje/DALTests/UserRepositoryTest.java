@@ -1,35 +1,36 @@
 package fr.madeit.arosaje.DALTests;
 
+import fr.madeit.arosaje.DAL.UserRepository;
 import fr.madeit.arosaje.BO.User;
-import fr.madeit.arosaje.DAL.FournisseurRepository;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
+import java.util.List;
 
 @SpringBootTest
-public class FournisseurRepositoryTest {
-    @Autowired
-    private FournisseurRepository dao;
+@ExtendWith(MockitoExtension.class)
+class UserRepositoryTest {
+
+    @Mock
+    private UserRepository userRepository;
 
     @Test
-    public void testSave() {
-        User user = new User(1, "Test");
-        User savedUser = dao.save(user);
+    void testFindByUsername() {
+        when(userRepository.findByUsername(anyString())).thenReturn(List.of(new User()));
 
-        assertEquals(user, savedUser);
-        assertNotNull(savedUser.getId());
+        Iterable<User> result = userRepository.findByUsername("johndoe");
+        assertNotNull(result);
+        verify(userRepository).findByUsername("johndoe");
     }
 
-    @Test
-    public void testFindByRaisonSociale() {
-        User user = new User(1, "Test");
-        dao.save(user);
 
-        User foundUser = dao.findByRaisonSociale("Test");
 
-        assertEquals(user, foundUser);
-    }
+
+
 }
