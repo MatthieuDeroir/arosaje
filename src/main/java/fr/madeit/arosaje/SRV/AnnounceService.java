@@ -15,4 +15,8 @@ public class AnnounceService {
     public List<Announce> getAllAnnounces() {
         return announceRepository.findAll();
     }
+
+    public List<Announce> getAllByIdentifier(String identifier) {
+        return announceRepository.findAllByTitleIgnoreCaseOrBodyContainingIgnoreCase(identifier, identifier);
+    }
 }
