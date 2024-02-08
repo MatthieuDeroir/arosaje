@@ -1,6 +1,18 @@
 package fr.madeit.arosaje.SRV;
 
+import fr.madeit.arosaje.BO.Announce;
+import fr.madeit.arosaje.DAL.AnnounceRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
 public class AnnounceService {
+    private final AnnounceRepository announceRepository;
 
+    public AnnounceService(AnnounceRepository announceRepository) {this.announceRepository = announceRepository;}
 
+    public List<Announce> getAllAnnounces() {
+        return announceRepository.findAll();
+    }
 }
