@@ -1,97 +1,40 @@
-package fr.madeit.arosaje.BO;
+package fr.madeit.arosaje.DTO;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Objects;
-
-@Entity
-@Table(name = "\"user\"", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
-public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Integer id;
-
-    @Column(name = "USERNAME")
-    // Unique u
+public class SignUpDto {
+    private String email;
+    private String password;
+    // Add other fields as necessary, for example:
     private String username;
-
-    @Column(name = "FIRST_NAME")
     private String firstName;
-
-    @Column(name = "LAST_NAME")
     private String lastName;
 
-    // STREET_NUMBER, STREET_NAME, ZIP_CODE, CITY, COUNTRY
-    @Column(name = "STREET_NUMBER")
     private String streetNumber;
 
-    @Column(name = "STREET_NAME")
     private String streetName;
 
-    @Column(name = "ZIP_CODE")
     private String zipCode;
 
-    @Column(name = "CITY")
     private String city;
 
-    @Column(name = "COUNTRY")
     private String country;
 
-    @Column(name = "BIRTH_DATE")
     private String birthDate;
 
-    @Column(name = "LAST_GPS_LOCATION")
     private String lastGpsLocation;
 
-    @Column(name = "LAST_GPS_LOCATION_TIMESTAMP")
     private String lastGpsLocationDate;
 
-    @Column(name = "LAST_LOGIN_TIMESTAMP")
     private String lastLoginDate;
 
-    @Column(name = "ROLE_ID")
     private Integer roleId;
 
-    @Column(name = "CREATED_AT")
     private String createdAt;
 
-    @Column(name = "UPDATED_AT")
     private String updatedAt;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public SignUpDto() {
     }
 
     public String getStreetNumber() {
@@ -189,4 +132,47 @@ public class User implements Serializable {
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    // ... add getters and setters for additional fields
 }
+

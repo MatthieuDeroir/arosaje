@@ -1,4 +1,4 @@
-package fr.madeit.arosaje.controller;
+package fr.madeit.arosaje.Controller;
 
 import fr.madeit.arosaje.BO.Announce;
 import fr.madeit.arosaje.SRV.AnnounceService;

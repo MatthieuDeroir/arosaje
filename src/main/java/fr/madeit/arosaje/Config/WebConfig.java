@@ -1,4 +1,4 @@
-package fr.madeit.arosaje;
+package fr.madeit.arosaje.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
