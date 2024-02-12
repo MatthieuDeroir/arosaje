@@ -23,4 +23,43 @@ public class Conversation implements Serializable {
     @Column(name = "updated_at")
     private String updatedAt;
 
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        Id = id;
+    }
+
+    public Integer getUser1Id() {
+        return user1Id;
+    }
+
+    public void setUser1Id(Integer user1Id) {
+        this.user1Id = user1Id;
+    }
+
+    public Integer getUser2Id() {
+        return user2Id;
+    }
+
+    public void setUser2Id(Integer user2Id) {
+        this.user2Id = user2Id;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

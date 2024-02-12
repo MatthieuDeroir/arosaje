@@ -9,4 +9,6 @@ public interface ConversationRepository extends JpaRepository<Conversation, Inte
     Iterable<Conversation> findByUser2Id(Integer userId);
 
     Iterable<Conversation> findByUser1IdAndUser2Id(Integer user1Id, Integer user2Id);
+
+
 }
