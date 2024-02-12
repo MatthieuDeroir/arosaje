@@ -42,11 +42,11 @@ public class Message implements Serializable {
         this.conversationId = conversationId;
     }
 
-    public Integer getUserId() {
+    public Integer getSenderId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setSenderId(Integer userId) {
         this.userId = userId;
     }
 
