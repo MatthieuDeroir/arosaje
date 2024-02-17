@@ -2,10 +2,7 @@ package fr.madeit.arosaje.Controller;
 
 import fr.madeit.arosaje.BO.User;
 import fr.madeit.arosaje.SRV.CustomUserDetailsService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +15,7 @@ public class UserController {
 
 
     @GetMapping("/{userIdentifier}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public User getById(@PathVariable Integer userIdentifier) {
         return userService.getUserById(userIdentifier);
     }

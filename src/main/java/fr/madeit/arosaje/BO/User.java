@@ -1,12 +1,14 @@
 package fr.madeit.arosaje.BO;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 @Entity
+@Getter
 @Table(name = "\"user\"", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User implements Serializable {
     @Id

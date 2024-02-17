@@ -6,6 +6,7 @@ import fr.madeit.arosaje.DTO.SignUpDto;
 import fr.madeit.arosaje.SRV.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +21,14 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/api/auth/signup")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<?> signUp(@RequestBody SignUpDto signUpDto) {
         authService.registerUser(signUpDto);
         return ResponseEntity.ok("User registered successfully");
     }
 
     @PostMapping("/api/auth/signin")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<?> signIn(@RequestBody SignUpDto signUpDto) {
         if (authService.logUser(signUpDto.getEmail(), signUpDto.getPassword()) == null) {
             return ResponseEntity.badRequest().body("Invalid credentials");

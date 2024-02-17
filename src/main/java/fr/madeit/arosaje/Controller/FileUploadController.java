@@ -15,6 +15,7 @@ public class FileUploadController {
     private FileStorageService fileStorageService;
 
     @PostMapping("/upload")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
 

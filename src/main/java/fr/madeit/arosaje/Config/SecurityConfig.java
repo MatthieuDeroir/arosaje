@@ -1,6 +1,7 @@
 package fr.madeit.arosaje.Config;
 
 import fr.madeit.arosaje.SRV.CustomUserDetailsService;
+import lombok.Getter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
+
 @EnableWebSecurity
 public class SecurityConfig {
 
@@ -38,7 +40,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/auth/signup/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/signin/**").permitAll()
 //            our private endpoints
-                        .anyRequest().authenticated())
+//                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .authenticationManager(authenticationManager)
                 .build();
     }

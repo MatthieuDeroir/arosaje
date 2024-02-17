@@ -4,6 +4,7 @@ import fr.madeit.arosaje.BO.Login;
 import fr.madeit.arosaje.BO.User;
 import fr.madeit.arosaje.DAL.LoginRepository;
 import fr.madeit.arosaje.DAL.UserRepository;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.Collections;
+@Getter
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
