@@ -12,7 +12,9 @@ public class AnnounceController {
     private final AnnounceService announceService;
 
 
-    public AnnounceController(AnnounceService announceService) {this.announceService = announceService;}
+    public AnnounceController(AnnounceService announceService) {
+        this.announceService = announceService;
+    }
 
     @GetMapping("")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -20,10 +22,10 @@ public class AnnounceController {
         return announceService.getAllAnnounces();
     }
 
-    @GetMapping("/{identifier}")
+    @GetMapping("/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<Announce> getAllByIdentifier(@PathVariable String identifier) {
-        return announceService.getAllByIdentifier(identifier);
+    public Announce getById(@PathVariable Integer id) {
+        return announceService.getById(id);
     }
 
     // get by announcer id

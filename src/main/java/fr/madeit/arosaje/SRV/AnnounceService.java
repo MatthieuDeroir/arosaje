@@ -41,4 +41,8 @@ public class AnnounceService {
     public Announce updateAnnounce(Announce announce) {
         return announceRepository.save(announce);
     }
+
+    public Announce getById(Integer id) {
+        return announceRepository.findById(id).orElse(null);
+    }
 }

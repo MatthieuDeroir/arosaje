@@ -10,7 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import fr.madeit.arosaje.DTO.FileDto;
 
 @RestController
-@RequestMapping("/api/media")
+@RequestMapping("/api/medias")
 public class FileUploadController {
 
     @Autowired
@@ -18,35 +18,50 @@ public class FileUploadController {
 
     @PostMapping("/upload/plant")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<String> uploadPlantFile(@RequestParam("file") MultipartFile file, @RequestBody FileDto fileDtO) {
+    public ResponseEntity<String> uploadPlantFile(@RequestParam("file") MultipartFile file, @RequestParam("entityId") Integer entityId, @RequestParam("userId") Integer userId) {
+        FileDto fileDtO = new FileDto();
+        fileDtO.setEntityId(entityId);
+        fileDtO.setUserId(userId);
         fileDtO.setEntityType(EntityType.PLANT);
         return uploadFileWithEntityType(file, fileDtO);
     }
 
     @PostMapping("/upload/user")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<String> uploadUserFile(@RequestParam("file") MultipartFile file, @RequestBody FileDto fileDtO) {
+    public ResponseEntity<String> uploadUserFile(@RequestParam("file") MultipartFile file, @RequestParam("entityId") Integer entityId, @RequestParam("userId") Integer userId) {
+        FileDto fileDtO = new FileDto();
+        fileDtO.setEntityId(entityId);
+        fileDtO.setUserId(userId);
         fileDtO.setEntityType(EntityType.USER);
         return uploadFileWithEntityType(file, fileDtO);
     }
 
     @PostMapping("/upload/announcement")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<String> uploadAnnouncementFile(@RequestParam("file") MultipartFile file, @RequestBody FileDto fileDtO) {
+    public ResponseEntity<String> uploadAnnouncementFile(@RequestParam("file") MultipartFile file, @RequestParam("entityId") Integer entityId, @RequestParam("userId") Integer userId) {
+        FileDto fileDtO = new FileDto();
+        fileDtO.setEntityId(entityId);
+        fileDtO.setUserId(userId);
         fileDtO.setEntityType(EntityType.ANNOUNCE);
         return uploadFileWithEntityType(file, fileDtO);
     }
 
     @PostMapping("/upload/message")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<String> uploadMessageFile(@RequestParam("file") MultipartFile file, @RequestBody FileDto fileDtO) {
+    public ResponseEntity<String> uploadMessageFile(@RequestParam("file") MultipartFile file, @RequestParam("entityId") Integer entityId, @RequestParam("userId") Integer userId) {
+        FileDto fileDtO = new FileDto();
+        fileDtO.setEntityId(entityId);
+        fileDtO.setUserId(userId);
         fileDtO.setEntityType(EntityType.MESSAGE);
         return uploadFileWithEntityType(file, fileDtO);
     }
 
     @PostMapping("/upload/upkeep")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<String> uploadUpkeepFile(@RequestParam("file") MultipartFile file, @RequestBody FileDto fileDtO) {
+    public ResponseEntity<String> uploadUpkeepFile(@RequestParam("file") MultipartFile file, @RequestParam("entityId") Integer entityId, @RequestParam("userId") Integer userId) {
+        FileDto fileDtO = new FileDto();
+        fileDtO.setEntityId(entityId);
+        fileDtO.setUserId(userId);
         fileDtO.setEntityType(EntityType.UPKEEP);
         return uploadFileWithEntityType(file, fileDtO);
     }
