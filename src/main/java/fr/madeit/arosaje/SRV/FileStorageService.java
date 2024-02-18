@@ -1,5 +1,8 @@
 package fr.madeit.arosaje.SRV;
 
+import fr.madeit.arosaje.BO.Media;
+import fr.madeit.arosaje.DAL.MediaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -20,6 +23,9 @@ public class FileStorageService {
 
     private Path fileStorageLocation;
 
+    @Autowired
+    private MediaRepository mediaRepository;
+
     @PostConstruct
     public void init() {
         this.fileStorageLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
@@ -37,6 +43,17 @@ public class FileStorageService {
         try {
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation);
+
+
+            //TODO: fill the remaining fields of the media object
+            // get the user id from the security context
+            Media media = new Media();
+            media.setFileName(fileName);
+            media.setType(file.getContentType());
+            media.setSize((int) file.getSize());
+
+
+            mediaRepository.save(media);
 
             return fileName;
         } catch (IOException ex) {
