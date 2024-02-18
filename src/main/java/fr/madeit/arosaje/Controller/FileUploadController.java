@@ -16,20 +16,26 @@ public class FileUploadController {
 
     @PostMapping("/upload/plant")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<String> uploadPlantFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadPlantFile(@RequestParam("file") MultipartFile file, @RequestParam("plantId") Integer plantId) {
         return uploadFileWithEntityType(file, "plant");
     }
 
     @PostMapping("/upload/user")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<String> uploadUserFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadUserFile(@RequestParam("file") MultipartFile file, @RequestParam("userId") Integer userId) {
         return uploadFileWithEntityType(file, "user");
     }
 
     @PostMapping("/upload/announcement")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<String> uploadAnnouncementFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadAnnouncementFile(@RequestParam("file") MultipartFile file, @RequestParam("announcementId") Integer announcementId) {
         return uploadFileWithEntityType(file, "announcement");
+    }
+
+    @PostMapping("/upload/message")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<String> uploadMessageFile(@RequestParam("file") MultipartFile file, @RequestParam("messageId") Integer messageId) {
+        return uploadFileWithEntityType(file, "message");
     }
 
     private ResponseEntity<String> uploadFileWithEntityType(MultipartFile file, String entityType) {
