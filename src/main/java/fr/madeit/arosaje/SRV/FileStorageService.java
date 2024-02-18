@@ -36,7 +36,7 @@ public class FileStorageService {
         }
     }
 
-    public String storeFile(MultipartFile file) {
+    public String storeFile(MultipartFile file, String entityType) {
         // Generate a unique filename to avoid conflicts
         String fileName = StringUtils.cleanPath(UUID.randomUUID().toString() + "-" + file.getOriginalFilename());
 
@@ -51,6 +51,7 @@ public class FileStorageService {
             media.setFileName(fileName);
             media.setType(file.getContentType());
             media.setSize((int) file.getSize());
+            media.setEntityType(entityType);
 
 
             mediaRepository.save(media);

@@ -14,10 +14,26 @@ public class FileUploadController {
     @Autowired
     private FileStorageService fileStorageService;
 
-    @PostMapping("/upload")
+    @PostMapping("/upload/plant")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        String fileName = fileStorageService.storeFile(file);
+    public ResponseEntity<String> uploadPlantFile(@RequestParam("file") MultipartFile file) {
+        return uploadFileWithEntityType(file, "plant");
+    }
+
+    @PostMapping("/upload/user")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<String> uploadUserFile(@RequestParam("file") MultipartFile file) {
+        return uploadFileWithEntityType(file, "user");
+    }
+
+    @PostMapping("/upload/announcement")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<String> uploadAnnouncementFile(@RequestParam("file") MultipartFile file) {
+        return uploadFileWithEntityType(file, "announcement");
+    }
+
+    private ResponseEntity<String> uploadFileWithEntityType(MultipartFile file, String entityType) {
+        String fileName = fileStorageService.storeFile(file, entityType);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
