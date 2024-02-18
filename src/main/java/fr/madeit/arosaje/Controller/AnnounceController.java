@@ -25,5 +25,31 @@ public class AnnounceController {
     public List<Announce> getAllByIdentifier(@PathVariable String identifier) {
         return announceService.getAllByIdentifier(identifier);
     }
+
+    // get by announcer id
+    @GetMapping("/findByAnnouncerId/{announcerId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Iterable<Announce> getAllByAnnouncerId(@PathVariable Integer announcerId) {
+        return announceService.getAllByAnnouncerId(announcerId);
+    }
+
+    @PostMapping("/add")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Announce addAnnounce(@RequestBody Announce announce) {
+        return announceService.addAnnounce(announce);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void deleteAnnounce(@PathVariable Integer id) {
+        announceService.deleteAnnounce(id);
+    }
+
+    @PutMapping("/update")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Announce updateAnnounce(@RequestBody Announce announce) {
+        return announceService.updateAnnounce(announce);
+    }
+
 }
 
