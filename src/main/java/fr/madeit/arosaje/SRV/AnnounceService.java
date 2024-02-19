@@ -45,4 +45,20 @@ public class AnnounceService {
     public Announce getById(Integer id) {
         return announceRepository.findById(id).orElse(null);
     }
+
+    public Iterable<Announce> getAllByPlantId(Integer plantId) {
+        return announceRepository.findByPlantId(plantId);
+    }
+
+    public Iterable<Announce> getAllByStartDate(String startDate) {
+        return announceRepository.findByStartDate(startDate);
+    }
+
+    public Iterable<Announce> getAllByEndDate(String endDate) {
+        return announceRepository.findByEndDate(endDate);
+    }
+
+    public List<Announce> getAllByTitle(String title) {
+        return announceRepository.findAllByTitleIgnoreCase(title);
+    }
 }

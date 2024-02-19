@@ -57,6 +57,4 @@ public class PlantController {
         return plantService.updatePlant(plant);
     }
 
-
-
 }

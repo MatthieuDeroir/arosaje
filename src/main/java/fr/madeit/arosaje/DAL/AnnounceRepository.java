@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface AnnounceRepository extends JpaRepository<Announce, Integer> {
     List<Announce> findAllByTitleIgnoreCaseOrBodyContainingIgnoreCase(String title, String body);
+
     Iterable<Announce> findByAnnouncerId(Integer announcerId);
 
     Iterable<Announce> findByPlantId(Integer plantId);
@@ -17,4 +18,5 @@ public interface AnnounceRepository extends JpaRepository<Announce, Integer> {
 
     Iterable<Announce> findByEndDate(String endDate);
 
+    List<Announce> findAllByTitleIgnoreCase(String title);
 }

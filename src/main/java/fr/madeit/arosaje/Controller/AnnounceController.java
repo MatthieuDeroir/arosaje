@@ -35,6 +35,32 @@ public class AnnounceController {
         return announceService.getAllByAnnouncerId(announcerId);
     }
 
+    @GetMapping("/findByPlantId/{plantId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Iterable<Announce> getAllByPlantId(@PathVariable Integer plantId) {
+        return announceService.getAllByPlantId(plantId);
+    }
+
+    @GetMapping("/findByStartDate/{startDate}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Iterable<Announce> getAllByStartDate(@PathVariable String startDate) {
+        return announceService.getAllByStartDate(startDate);
+    }
+
+    @GetMapping("/findByEndDate/{endDate}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Iterable<Announce> getAllByEndDate(@PathVariable String endDate) {
+        return announceService.getAllByEndDate(endDate);
+    }
+
+    @GetMapping("/findByTitle/{title}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Announce> getAllByTitle(@PathVariable String title) {
+        return announceService.getAllByTitle(title);
+    }
+
+
+
     @PostMapping("/add")
     @CrossOrigin(origins = "http://localhost:3000")
     public Announce addAnnounce(@RequestBody Announce announce) {
@@ -52,6 +78,8 @@ public class AnnounceController {
     public Announce updateAnnounce(@RequestBody Announce announce) {
         return announceService.updateAnnounce(announce);
     }
+
+
 
 }
 
