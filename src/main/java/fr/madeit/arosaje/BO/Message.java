@@ -17,7 +17,7 @@ public class Message implements Serializable {
     private Integer conversationId;
 
     @Column(name = "sender_id")
-    private Integer userId;
+    private Integer senderId;
 
     @Column(name = "body")
     private String body;
@@ -45,11 +45,11 @@ public class Message implements Serializable {
     }
 
     public Integer getSenderId() {
-        return userId;
+        return senderId;
     }
 
     public void setSenderId(Integer userId) {
-        this.userId = userId;
+        this.senderId = userId;
     }
 
     public String getBody() {

@@ -14,10 +14,28 @@ public class UserController {
     public UserController(CustomUserDetailsService userService) {this.userService = userService;}
 
 
-    @GetMapping("/{userIdentifier}")
+    @GetMapping("/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public User getById(@PathVariable Integer userIdentifier) {
-        return userService.getUserById(userIdentifier);
+    public User getById(@PathVariable Integer id) {
+        return userService.getUserById(id);
+    }
+
+    @GetMapping("")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @PostMapping("")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void addUser(@RequestBody User user) {
+        userService.addUser(user);
+    }
+
+    @PutMapping("")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void updateUser(@RequestBody User user) {
+        userService.updateUser(user);
     }
 }
 
