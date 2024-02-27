@@ -1,10 +1,12 @@
 package fr.madeit.arosaje.BO;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.io.Serializable;
 
 @Entity
+@Getter
 @Table(name = "message")
 public class Message implements Serializable {
     @Id
@@ -15,7 +17,7 @@ public class Message implements Serializable {
     private Integer conversationId;
 
     @Column(name = "sender_id")
-    private Integer userId;
+    private Integer senderId;
 
     @Column(name = "body")
     private String body;
@@ -42,12 +44,12 @@ public class Message implements Serializable {
         this.conversationId = conversationId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getSenderId() {
+        return senderId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setSenderId(Integer userId) {
+        this.senderId = userId;
     }
 
     public String getBody() {

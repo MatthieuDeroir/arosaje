@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "login")
+@Table(name = "login", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 public class Login implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

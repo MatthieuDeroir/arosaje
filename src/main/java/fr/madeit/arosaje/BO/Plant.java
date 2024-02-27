@@ -1,11 +1,13 @@
 package fr.madeit.arosaje.BO;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.io.Serializable;
 
 
 @Entity
+@Getter
 @Table(name = "plant")
 public class Plant implements Serializable {
     @Id
