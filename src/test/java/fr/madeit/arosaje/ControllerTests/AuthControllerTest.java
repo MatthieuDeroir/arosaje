@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -48,13 +51,12 @@ public class AuthControllerTest {
 
     @Test
     public void testSignIn() throws Exception {
-        String mockJwtToken = "mockJwtToken";
-        SignUpDto signUpDto = new SignUpDto("testuser", "test@example.com", "password123");
+        SignUpDto signUpDto = new SignUpDto("test@example.com", "password123", "testuser");
         User mockUser = new User();
-        mockUser.setUsername(signUpDto.getUsername());
+        String mockJwtToken = "your_mocked_jwt_token";
 
-        when(authService.logUser(signUpDto.getEmail(), signUpDto.getPassword())).thenReturn(mockUser);
-        when(jwtUtil.generateToken(signUpDto.getUsername())).thenReturn(mockJwtToken);
+        doReturn(mockUser).when(authService).logUser(signUpDto.getEmail(), signUpDto.getPassword());
+        when(jwtUtil.generateToken(Mockito.any())).thenReturn("your_mocked_jwt_token");
 
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(authController).build();
 
@@ -65,7 +67,6 @@ public class AuthControllerTest {
                 .andReturn();
 
         String responseContent = result.getResponse().getContentAsString();
-        // You may need to adjust the assertions based on your actual response structure
         assert responseContent.contains(mockJwtToken) && responseContent.contains("User signed in successfully");
     }
 }
