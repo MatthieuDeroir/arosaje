@@ -1,33 +1,4 @@
-package fr.madeit.arosaje.ControllerTests;
-
-import fr.madeit.arosaje.BO.User;
-import fr.madeit.arosaje.Config.JwtRequestFilter;
-import fr.madeit.arosaje.Controller.UserController;
-import fr.madeit.arosaje.SRV.CustomUserDetailsService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@WebMvcTest(controllers = UserController.class)
-public class UserControllerTest {
-    @Autowired
-    private MockMvc mockMvc;
-
-
-    @MockBean
-    private CustomUserDetailsService userService;
-
-    @MockBean
-     private JwtRequestFilter jwtRequestFilter;
-
-    /*private String userJson = "{" +
+/*private String userJson = "{" +
             "id:1," +
             "username:johndoe," +
             "firstname:john," +
@@ -44,31 +15,86 @@ public class UserControllerTest {
             "roleId:1" +
             "createdAt:tr" +
             "updatedAt:tr}";*/
-    @BeforeEach
-    public void init() {
-            userService.addUser(new User());
-    }
+package fr.madeit.arosaje.ControllerTests;
 
-    /*@Test
-    @WithMockUser(value = "say", roles = {"ADMIN"})
-    public void testAddUser() throws Exception {
-        mockMvc.perform(post("http://localhost:8080/api/user/")
-                        .content(userJson)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }*/
+import fr.madeit.arosaje.BO.User;
+import fr.madeit.arosaje.Controller.UserController;
+import fr.madeit.arosaje.SRV.CustomUserDetailsService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@ExtendWith(MockitoExtension.class)
+public class UserControllerTest {
+
+    @Mock
+    private CustomUserDetailsService userService;
+
+    @InjectMocks
+    private UserController userController;
 
     @Test
-    @WithMockUser(value = "say")
     public void testGetById() throws Exception {
-        mockMvc.perform(get("http://localhost:8080/api/user/1"))
+        Integer mockUserId = 1;
+        User mockUser = new User();
+        mockUser.setId(mockUserId);
+        when(userService.getUserById(mockUserId)).thenReturn(mockUser);
+
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/{id}", mockUserId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(mockUserId));
+    }
+
+    @Test
+    public void testGetAllUsers() throws Exception {
+        List<User> mockUserList = Arrays.asList(new User(), new User());
+        when(userService.getAllUsers()).thenReturn(mockUserList);
+
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(mockUserList.size()));
+    }
+
+    @Test
+    public void testAddUser() throws Exception {
+        User mockUser = new User();
+
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{}"))  // Add your user JSON content here
                 .andExpect(status().isOk());
     }
 
     @Test
-    @WithMockUser(value = "say")
-    public void testGetAllUsers() throws Exception {
-        mockMvc.perform(get("http://localhost:8080/api/user"))
+    public void testUpdateUser() throws Exception {
+        User mockUser = new User();
+
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/user")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{}"))  // Add your user JSON content here
                 .andExpect(status().isOk());
     }
 }
