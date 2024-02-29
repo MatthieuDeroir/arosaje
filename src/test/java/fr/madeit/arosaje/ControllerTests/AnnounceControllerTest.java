@@ -7,9 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -17,6 +19,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -130,5 +134,52 @@ public class AnnounceControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(mockAnnounces.size()));
+    }
+
+    @Test
+    public void testAddAnnounce() throws Exception {
+        Announce mockAnnounce = new Announce();
+        doReturn(mockAnnounce).when(announceService).addAnnounce(any());
+
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(announceController).build();
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/announces/add")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{}"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String responseContent = result.getResponse().getContentAsString();
+        // You may need to adjust assertions based on your actual response structure
+        assert responseContent.contains("\"id\":") && responseContent.contains("\"createdAt\":");
+    }
+
+    @Test
+    public void testDeleteAnnounce() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(announceController).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/announces/delete/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        Mockito.verify(announceService, Mockito.times(1)).deleteAnnounce(1);
+    }
+
+    @Test
+    public void testUpdateAnnounce() throws Exception {
+        Announce mockAnnounce = new Announce();
+        doReturn(mockAnnounce).when(announceService).updateAnnounce(any());
+
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(announceController).build();
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/api/announces/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{}"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String responseContent = result.getResponse().getContentAsString();
+        // You may need to adjust assertions based on your actual response structure
+        assert responseContent.contains("\"id\":") && responseContent.contains("\"createdAt\":");
     }
 }
