@@ -63,6 +63,15 @@ public class User implements Serializable {
     @Column(name = "UPDATED_AT")
     private String updatedAt;
 
+    public User(String username, String firstName, String lastName) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public User() {
+
+    }
 
     public Integer getId() {
         return id;
