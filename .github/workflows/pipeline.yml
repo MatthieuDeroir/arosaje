@@ -27,6 +27,7 @@ jobs:
         run: mvn -B package --file pom.xml -Dspring.profiles.active=test -Dmaven.test.skip=true
 
   docker:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Build and push Docker image
