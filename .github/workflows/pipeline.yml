@@ -25,6 +25,10 @@ jobs:
           java-version: '21'
       - name: Build with Maven
         run: mvn -B package --file pom.xml -Dspring.profiles.active=test -Dmaven.test.skip=true
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
