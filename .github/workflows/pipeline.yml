@@ -42,7 +42,7 @@ jobs:
           name: arosaje-jar
           path: target
       - name: Build and push Docker image
-        run: docker build -t ghcr.io/MatthieuDeroir/arosaje/arosaje-backend:latest .
+        run: docker build -t ghcr.io/matthieuderoir/arosaje/arosaje-backend:latest .
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
@@ -50,6 +50,6 @@ jobs:
           username: ${{ secrets.GITHUB_ACTOR }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Push Docker image
-        run: docker push ghcr.io/MatthieuDeroir/arosaje/arosaje-backend:latest
+        run: docker push ghcr.io/matthieuderoir/arosaje/arosaje-backend:latest
 
 
