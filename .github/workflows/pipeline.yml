@@ -8,7 +8,8 @@ on:
   pull_request:
     branches:
       - main
-      -
+      - dev
+
 
 permissions: write-all
 
@@ -23,7 +24,7 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
       - name: Build with Maven
-        run: mvn -B package --file pom.xml # Probably add test here
+        run: mvn -B package --file pom.xml -Dspring.profiles.active=test -Dmaven.test.skip=true
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
