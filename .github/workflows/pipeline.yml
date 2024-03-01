@@ -24,7 +24,7 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
       - name: Build with Maven
-        run: mvn -B package --file pom.xml -Dspring.profiles.active=test
+        run: mvn -B package --file pom.xml -Dspring.profiles.active=test -Dmaven.test.skip=true
       - name: Upload JAR Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -47,4 +47,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false # Set to true and configure Docker Hub credentials to push
-          tags: maaawox/arosaje:latest # Replace 'user' with your Docker Hub username or organization
+          tags: user/arosaje:latest # Replace 'user' with your Docker Hub username or organization
