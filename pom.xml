@@ -149,14 +149,12 @@
             <version>1.4.200</version> <!-- Check for the latest version -->
             <scope>test</scope> <!-- This makes H2 available only for tests -->
         </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
