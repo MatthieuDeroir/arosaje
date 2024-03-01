@@ -14,7 +14,9 @@
     <name>arosaje</name>
     <description>arosaje</description>
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
+        <sonar.organization>matthieuderoir</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencies>
         <dependency>
@@ -144,14 +146,18 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.2.222</version> <!-- Check for the latest version -->
+            <scope>test</scope> <!-- This makes H2 available only for tests -->
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
 
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
