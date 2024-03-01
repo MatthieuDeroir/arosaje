@@ -136,6 +136,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version> <!-- Check for the latest version -->
+            <scope>test</scope> <!-- This makes H2 available only for tests -->
+        </dependency>
+
 
 
     </dependencies>
