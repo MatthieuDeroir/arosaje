@@ -29,5 +29,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           name: arosaje.jar
-          path: ../../target/arosaje-0.0.1-SNAPSHOT.jar
-
+          path: ./target
