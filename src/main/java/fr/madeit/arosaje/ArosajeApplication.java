@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ArosajeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ArosajeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ArosajeApplication.class, args);
+    }
 
 }
