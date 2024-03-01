@@ -3,10 +3,7 @@ package fr.madeit.arosaje.Controller;
 
 import fr.madeit.arosaje.BO.Species;
 import fr.madeit.arosaje.SRV.SpeciesService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/species")
@@ -35,19 +32,19 @@ public class SpeciesController {
         return speciesService.findByName(name);
     }
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     @CrossOrigin(origins = "http://localhost:3000")
     public Species addSpecies(Species species) {
         return speciesService.addSpecies(species);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public void deleteSpecies(Integer id) {
         speciesService.deleteSpecies(id);
     }
 
-    @GetMapping("/update")
+    @PutMapping("/update")
     @CrossOrigin(origins = "http://localhost:3000")
     public Species updateSpecies(Species species) {
         return speciesService.updateSpecies(species);
