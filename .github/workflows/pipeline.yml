@@ -42,11 +42,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MatthieuDeroir_arosaje -Dsonar.organization=matthieuderoir -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dspring.profiles.active=test -Dmaven.test.skip=true
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MatthieuDeroir_arosaje -Dsonar.organization=matthieuderoir -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Dspring.profiles.active=test -Dmaven.test.skip=true
+      - name: Upload JAR Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: arosaje-jar
+          path: target/arosaje-0.0.1-SNAPSHOT.jar
+          # Upload the quality gate status to GitHub
+
+
 
 
 
   test:
+    name: Tests
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -60,6 +69,7 @@ jobs:
         run: mvn -B test --file pom.xml -Dspring.profiles.active=test
 
   docker:
+    name: Build and push Docker image
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -79,5 +89,16 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Push Docker image
         run: docker push ghcr.io/matthieuderoir/arosaje/arosaje-backend:latest
+
+  deploy:
+    needs: docker  # Depends on the successful Docker image build and push
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'  # Conditional execution on push to master
+    steps:
+      - name: Trigger image to render.com  # Triggers the Render deployment using a curl command
+        run: curl https://api.render.com/deploy/srv-cncb5eacn0vc73f0abf0?key=03P-7j6L7rs
+
+
+
 
 
